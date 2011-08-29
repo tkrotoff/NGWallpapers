@@ -26,11 +26,17 @@ MONTHS = {
 MAX_WALLPAPERS_PER_MONTH = 100
 
 def download_wallpapers(output_dir, year, month)
+  p year
+  p month
+
   # Takes the last 2 characters, 2011 becomes 11
   year = year.to_s[-2, 2]
 
   # Month should be 2 characters long, 5 becomes 05
   month = "0#{month}" if month.to_s.length == 1
+
+  p year
+  p month
 
   (1..MAX_WALLPAPERS_PER_MONTH).each do |image_number|
     url = "http://ngm.nationalgeographic.com/wallpaper/img/20#{year}/#{month}/#{MONTHS[month]}#{year}wallpaper-#{image_number}_1600.jpg"
@@ -101,13 +107,13 @@ options = parseArgs(ARGV)
 output_dir = ARGV[0]
 raise OptionParser::InvalidOption, output_dir if !output_dir.nil? && !File.exists?(output_dir)
 year = options[:year].to_s
-raise OptionParser::InvalidOption, year if !year.nil? && year.size < 2
+raise OptionParser::InvalidOption, year if !year.empty? && year.size < 2
 month = options[:month].to_s
 all = options[:all]
 
-if !year.nil? && month.nil?
+if !year.empty? && month.empty?
   download_wallpapers_per_year(output_dir, year)
-elsif !year.nil? && !month.nil?
+elsif !year.empty? && !month.empty?
   download_wallpapers(output_dir, year, month)
 elsif all
   download_all_wallpapers(output_dir)
