@@ -1,0 +1,13 @@
+National Geographic wallpapers downloader
+
+Totally inspired by Morgan Lefieux's script:
+http://gerard.geekandfree.org/blog/2011/01/04/telechargez-simplement-les-fonds-decran-du-site-national-geo/
+Original idea taken from Romain Bochet:
+http://blog.stackr.fr/2011/01/rotation-fond-ecrans-wallpapers-national-geographic/
+https://github.com/rbochet/National-Geographic-Wallpaper-Download
+
+Fetches wallpapers from http://ngm.nationalgeographic.com/wallpaper/download
+Works only for wallpapers after 2009-09, resolution is 1600x1200
+Written in Ruby, I did it as an exercise
+
+Run it inside a terminal/command prompt without arguments, it will show you the help and available options

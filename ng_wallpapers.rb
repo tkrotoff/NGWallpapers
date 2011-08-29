@@ -20,7 +20,7 @@ MONTHS = {
   '09' => 'sept',
   '10' => 'oct',
   '11' => 'nov',
-  '12' => 'dec'  
+  '12' => 'dec'
 }
 
 MAX_WALLPAPERS_PER_MONTH = 100
