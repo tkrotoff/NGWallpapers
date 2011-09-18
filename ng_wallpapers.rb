@@ -57,18 +57,18 @@ class NGWallpapers
     current_year = Time.now.year
 
     raise ArgumentError, "#{year} < 2009 || #{year} > #{current_year}" if year < 2009 || year > current_year
-    # Takes the last 2 characters, 2011 becomes 11
+    # Removes the last 2 characters, 2011 becomes 11
     year = year.to_s[-2, 2]
 
     raise ArgumentError, "#{month} < 1 || #{month} > 12" if month < 1 || month > 12
     # Month should be 2 characters long, 5 becomes 05
     month = "0#{month}" if month.to_s.size < 2
-    # Takes the last 2 characters
+    # Removes the last 2 characters
     month = month.to_s[-2, 2]
 
     (1..MAX_WALLPAPERS_PER_MONTH).each do |image_number|
       url = "http://ngm.nationalgeographic.com/wallpaper/img/20#{year}/#{month}/#{MONTHS[month]}#{year}wallpaper-#{image_number}_1600.jpg"
-      file_path = "#{@output_dir}/NationalGeographic-20#{year}-#{month}-#{image_number}.jpg"
+      file_path = "#{@output_dir}/NationalGeographic-20#{year}-#{month}-n#{image_number}.jpg"
 
       unless File.exists?(file_path)
         begin
@@ -78,15 +78,24 @@ class NGWallpapers
             file.write(data)
             puts "Wallpaper saved: #{file_path}"
           end
-        rescue OpenURI::HTTPError
-          # Needed because the file was created with no data inside (and a size
-          # of 0 bytes)
+        rescue OpenURI::HTTPError => e
+          # Needed because the file was created with no data inside (size of 0 bytes)
           File.delete(file_path)
-          puts "Invalid URL\n\n"
+          puts "Invalid URL, #{e}\n\n"
+          break
+        rescue Timeout::Error => e
+          # Needed because the file was created with no data inside (size of 0 bytes)
+          File.delete(file_path)
+          puts "Timeout, #{e}\n\n"
+          break
+        rescue SocketError => e
+          # Needed because the file was created with no data inside (size of 0 bytes)
+          File.delete(file_path)
+          puts "Socket error, #{e}\n\n"
           break
         end
       else
-        puts "File exists already: #{file_path}"
+        puts "File already exists: #{file_path}"
       end
       puts "\n"
     end
