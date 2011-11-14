@@ -3,7 +3,7 @@
 require 'open-uri'
 require 'optparse'
 
-# Dowloads wallpapers from National Geographic website.
+# Downloads wallpapers from National Geographic website.
 #
 # Totally inspired by Morgan Lefieux's script:
 # http://gerard.geekandfree.org/blog/2011/01/04/telechargez-simplement-les-fonds-decran-du-site-national-geo/
