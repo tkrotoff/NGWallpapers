@@ -37,4 +37,4 @@ Run it inside a terminal/command prompt without arguments, it will show you the 
 
 ## License
 
-Do whatever you like with it, this is public domain.
+Do whatever you like, this is public domain.
